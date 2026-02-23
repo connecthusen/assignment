@@ -1,3 +1,4 @@
+import math
 class Calculator:                               #  a class named Calculator
     def __init__(self,a,b):                     # Constructor method
         self.a=a
@@ -25,13 +26,30 @@ class Calculator:                               #  a class named Calculator
     def exp(self):                                       # Method to perform exponential
         return self.a**self.b
     
+    def sqrt(self):                             # Square root method
+        if self.a < 0:
+            return "Square root not defined for negative number"
+        return math.sqrt(self.a)
+
+    def percentage(self):                       # Percentage method
+        return (self.a * self.b) / 100
+    
 if __name__=='__main__':
     try:
         a=int(input("enter the first value:"))
-        s=input('enter the symbol(+,-,*,/,%,^):')
+        s=input('enter the symbol(+,-,*,/,%,^,sqrt,per):')
         b=int(input("enter the second value:"))
         obj=Calculator(a,b)
-        if s == '+':
+
+        if s == "sqrt":
+            obj = Calculator(a)
+            print(f"√{a} = {obj.sqrt()}")
+
+        elif s == "per":
+            obj = Calculator(a, b)
+            print(f"{b}% of {a} = {obj.percentage()}")
+            
+        elif s == '+':
             print(f"{a}+{b}={obj.add()}")
         elif s == '-':
             print(f"{a}-{b}={obj.sub()}")
