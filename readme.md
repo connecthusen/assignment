@@ -10,7 +10,7 @@ ASSIGNMENT2 – Python Programming Lab
 
 This assignment consists of 20 Python programs designed to strengthen fundamental programming concepts including conditionals, loops, functions, number systems, and basic problem-solving techniques.
 
-Questions Attempted
+**Questions Attempted**
 
 The following programs were successfully implemented:
 
