@@ -1,12 +1,12 @@
-Full Name
+**Full Name**
 
-Husen
+HUSENSAB
 
-Assignment Title
+**Assignment Title**
 
 ASSIGNMENT2 – Python Programming Lab
 
-Overview
+**Overview**
 
 This assignment consists of 20 Python programs designed to strengthen fundamental programming concepts including conditionals, loops, functions, number systems, and basic problem-solving techniques.
 
@@ -52,4 +52,4 @@ T7.emperature Converter
 
 19.Text Analysis
 
-20.Number System (including Armstrong Number, GCD, LCM, and Perfect Number)
+20.Number System 
