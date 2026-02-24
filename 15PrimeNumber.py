@@ -1,4 +1,4 @@
-def prime(num):
+def prime(num):  # to find finle number is Prime or not
     if num<2:
         return False
     else:
@@ -8,7 +8,7 @@ def prime(num):
         else:
             return True
     
-def RangeOfPrime(start,end):
+def RangeOfPrime(start,end):  #to find prime numbers from start to end
     if start<2 and end<2:
         print("there is No Prime numbers..")
     else:
@@ -21,7 +21,7 @@ if __name__=='__main__':
     print("***Prime Numbers***")
     print("1.SingleNUmber")
     print("2.Range")
-    Choice=int(input("Enter your Choice:"))
+    Choice=int(input("Enter your Choice:"))   #user inputs
     if Choice==1:
         num=int(input("Enter the Number:"))
         if prime(num):

@@ -59,7 +59,7 @@ def word_frequency(text):  #calcualte the word frequency
     return freq
 
 
-def longest(text):
+def longest(text):  # check longest word
     words = text.split()
     longest = ""
 
@@ -70,7 +70,7 @@ def longest(text):
     return longest
 
 
-def analyze_text(text):
+def analyze_text(text):  # print all
     print("\n=== TEXT ANALYSIS ===")
 
     print("Words:", words(text))

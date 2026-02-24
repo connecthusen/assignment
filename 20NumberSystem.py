@@ -1,4 +1,4 @@
-def factorial(n):
+def factorial(n):     #to find factorail of numbers
     if n < 0:
         return "Not defined for negative numbers"
     fact = 1
@@ -7,7 +7,7 @@ def factorial(n):
     return fact
 
 
-def is_prime(n):
+def is_prime(n):             #to find prime number
     if n <= 1:
         return False
     for i in range(2, n):
@@ -16,7 +16,7 @@ def is_prime(n):
     return True
 
 
-def fibonacci(n):
+def fibonacci(n):       #to find fibonacci serise
     if n <= 0:
         return "Invalid input"
     elif n == 1:
@@ -27,7 +27,7 @@ def fibonacci(n):
         return fibonacci(n - 1) + fibonacci(n - 2)
 
 
-def sum_of_digits(n):
+def sum_of_digits(n):  #to find sum digits
     total = 0
     n = abs(n)
     while n > 0:
@@ -37,7 +37,7 @@ def sum_of_digits(n):
     return total
 
 
-def reverse_number(n):
+def reverse_number(n):  #reverse the numbers
     rev = 0
     negative = False
     if n < 0:
@@ -52,7 +52,7 @@ def reverse_number(n):
     return rev
 
 
-def is_armstrong(n):
+def is_armstrong(n):  #to find is armstrong
     temp = n
     power = len(str(n))
     total = 0
@@ -67,7 +67,7 @@ def is_armstrong(n):
         return False
 
 
-def gcd(a, b):
+def gcd(a, b): #to find gcd
     while b != 0:
         temp = b
         b = a % b
@@ -75,11 +75,11 @@ def gcd(a, b):
     return a
 
 
-def lcm(a, b):
+def lcm(a, b):  #tofind lcm
     return abs(a * b) // gcd(a, b)
 
 
-def is_perfect_number(n):
+def is_perfect_number(n):  #to find perfect numberd
     if n <= 0:
         return False
 
