@@ -1,0 +1,17 @@
+# ── API Keys & Secrets ────────────────────────────────────────────────────────
+.env
+.env.*
+*.env
+secrets.py
+
+
+# ── Virtual Environments ──────────────────────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+
+# ── Jupyter Notebooks ─────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb

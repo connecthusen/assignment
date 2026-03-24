@@ -1,0 +1,16 @@
+
+# requirements.txt
+
+python-dotenv>=1.0.0          
+
+groq>=0.9.0                   
+cohere>=5.5.0               
+google-genai>=1.0.0          
+huggingface-hub>=0.23.0      
+
+requests>=2.31.0            
+
+# Notes:
+#    Ollama runs locally and requires NO Python package.
+#    Download the server from https://ollama.ai/ and pull a model:
+#    ollama pull qwen2.5:7b
