@@ -42,7 +42,7 @@ ai-api-integration/
 | `huggingface_example.py` | Hugging Face | DeepSeek V3 0324 | ✅ Free Inference API |
 | `gemini_example.py` | Google Gemini | Gemini 2.0 Flash | ✅ Free tier (15 RPM) |
 | `cohere_example.py` | Cohere | Command R Plus | ✅ 1,000 calls/month free |
-| `multi_api_query.py` | All of the above | — | ✅ BONUS |
+| `multi_api_query.py` | All of the above | — |    |
 
 ---
 
@@ -179,7 +179,7 @@ python multi_api_query.py
 - **Unified interface** — `multi_api_query.py` lets you switch providers or compare all at once
 - **Graceful error handling** — all scripts catch and report API errors without crashing
 - **Environment variable security** — zero hardcoded API keys anywhere in the codebase
-- **Side-by-side comparison** — BONUS mode queries all providers and prints results together
+- **Side-by-side comparison** — queries all providers and prints results together
 
 ---
 
@@ -191,11 +191,10 @@ Working program outputs are saved in the `screenshots/` directory.
 
 ## Important Notes
 
-- ⚠️ **API keys are never hardcoded** — environment variables are used throughout
-- ⚠️ **Do not commit `.env`** — it must remain in `.gitignore`
+-  **API keys are never hardcoded** — environment variables are used throughout
+-  **Do not commit `.env`** — it must remain in `.gitignore`
 - Free tier rate limits apply — be mindful of request frequency
 - Ollama requires sufficient CPU/GPU to run a 7B parameter model locally
-- Use the **same GitHub repository** from your previous assignment — do not create a new one
 
 ---
 
