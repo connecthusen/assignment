@@ -1,5 +1,5 @@
 # AI API Integration
-### Generative AI Assignment — CampusPe | Mentor: Jacob Dennis
+### Generative AI Assignment — CampusPe 
 
 ---
 
