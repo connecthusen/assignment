@@ -159,7 +159,7 @@ $(function () {
   function addMessage (text, sender) {
     const isUser    = sender === 'user';
     const cls       = isUser ? 'user-message' : 'ai-message';
-    const name      = isUser ? 'Husen' : 'KuttyAI';
+    const name      = isUser ? 'Husen' : 'Kutty.AI';
     const avatarCls = isUser ? 'user-avatar-msg' : 'ai-avatar';
     const avatarInner = isUser
       ? 'H'
@@ -336,24 +336,59 @@ $(function () {
 
 
   /* ════════════════════════════════════════════════════
-    10.  SIDEBAR
+    10.  SIDEBAR PANEL
   ════════════════════════════════════════════════════ */
-  function closeSidebar () {
-    $('#sidebar').removeClass('open');
+  function openPanel () {
+    $('#sidebar-panel').addClass('open');
+    $('#sidebar-overlay').addClass('active');
+    $('body').css('overflow', 'hidden');
+  }
+
+  function closePanel () {
+    $('#sidebar-panel').removeClass('open');
     $('#sidebar-overlay').removeClass('active');
     $('body').css('overflow', '');
   }
 
-  $('#hamburger-btn').on('click', function () {
-    $('#sidebar').addClass('open');
-    $('#sidebar-overlay').addClass('active');
-    $('body').css('overflow', 'hidden');
+  // Hamburger opens panel
+  $('#hamburger-btn').on('click', openPanel);
+
+  // Overlay click closes
+  $('#sidebar-overlay').on('click', closePanel);
+
+  // Close button inside panel
+  $('#sp-close-btn').on('click', closePanel);
+
+  // New Chat button in panel
+  $('#sp-new-chat-btn').on('click', function () {
+    resetChat(); closePanel();
+    $('.sp-history-item').removeClass('active');
+    $('.sp-history-item').first().addClass('active');
   });
 
-  $('#sidebar-overlay').on('click', closeSidebar);
+  // Search toggle
+  let searchOpen = false;
+  $('#sp-search-toggle-btn').on('click', function () {
+    searchOpen = !searchOpen;
+    $('#sp-search-box').toggleClass('open', searchOpen);
+    if (searchOpen) { setTimeout(() => $('#sp-search-input').focus(), 280); }
+    else { $('#sp-search-input').val('').trigger('input'); }
+  });
 
-  $('#new-chat-btn').on('click', function () {
-    resetChat(); closeSidebar();
+  // Live search filter
+  $('#sp-search-input').on('input', function () {
+    const q = $(this).val().toLowerCase().trim();
+    $('.sp-history-item').each(function () {
+      const title = $(this).find('.sp-item-title').text().toLowerCase();
+      $(this).toggleClass('hidden-item', q.length > 0 && !title.includes(q));
+    });
+  });
+
+  // History item click
+  $(document).on('click', '.sp-history-item', function () {
+    $('.sp-history-item').removeClass('active');
+    $(this).addClass('active');
+    closePanel();
   });
 
 

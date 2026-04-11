@@ -1,11 +1,5 @@
-/* ============================================================
-   KuttyAI — style.css  (Professional Edition)
-   Author  : Husen
-   Stack   : HTML5 · CSS3 · Bootstrap 5 · jQuery
-   Fonts   : Nunito (Calibri-feel) + Exo 2 (display)
-   ============================================================ */
 
-/* ─── 1. CSS VARIABLES ───────────────────────────────────────── */
+/* 1. CSS VARIABLES  */
 :root {
   --accent:           #00cfc8;
   --accent-2:         #00a8a0;
@@ -76,7 +70,7 @@ body.dark-mode {
   --shadow-input:  0 2px 16px rgba(0,0,0,0.35);
 }
 
-/* ─── 2. RESET & BASE ────────────────────────────────────────── */
+/*  2. RESET & BASE  */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 html, body {
@@ -90,13 +84,13 @@ html, body {
   letter-spacing: 0.012em;
 }
 
-/* ─── 3. CUSTOM SCROLLBAR ────────────────────────────────────── */
+/*  3. CUSTOM SCROLLBAR  */
 * { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
 
-/* ─── 4. SPLASH SCREEN ───────────────────────────────────────── */
+/*  4. SPLASH SCREEN  */
 #intro-splash {
   position: fixed; inset: 0; z-index: 9999;
   display: flex; align-items: center; justify-content: center;
@@ -187,7 +181,7 @@ html, body {
   animation: logoFly 0.6s cubic-bezier(0.4,0,0.2,1) forwards !important;
 }
 
-/* ─── 5. SPLASH KEYFRAMES ────────────────────────────────────── */
+/*  5. SPLASH KEYFRAMES */
 @keyframes splashAppear {
   from { opacity:0; transform: scale(0.35) rotate(-20deg); }
   to   { opacity:1; transform: scale(1)    rotate(0deg); }
@@ -214,7 +208,7 @@ html, body {
   100% { transform: scale(0.15) translate(-400px, -340px); opacity:0; }
 }
 
-/* ─── 6. APP LAYOUT ──────────────────────────────────────────── */
+/*  6. APP LAYOUT  */
 #app { display:flex; height:100vh; overflow:hidden; }
 .app-hidden  { visibility:hidden; opacity:0; }
 .app-visible { visibility:visible; opacity:1; animation: appReveal 0.5s ease both; }
@@ -224,7 +218,7 @@ html, body {
   to   { opacity:1; transform: translateY(0); }
 }
 
-/* ─── 7. SIDEBAR ─────────────────────────────────────────────── */
+/*  7. SIDEBAR */
 #sidebar {
   width: var(--sidebar-w); min-width: var(--sidebar-w);
   height: 100vh; background: var(--bg-sidebar);
@@ -337,7 +331,7 @@ html, body {
   border-color: rgba(0,207,200,0.5);
 }
 
-/* ─── 8. OVERLAY ─────────────────────────────────────────────── */
+/*  8. OVERLAY  */
 #sidebar-overlay {
   display: none; position: fixed; inset: 0;
   background: rgba(0,0,0,0.55); z-index: 150;
@@ -345,7 +339,7 @@ html, body {
 }
 #sidebar-overlay.active { display: block; }
 
-/* ─── 9. MAIN CONTENT ────────────────────────────────────────── */
+/*  9. MAIN CONTENT  */
 #main-content {
   flex:1; display:flex; flex-direction:column;
   height:100vh; overflow:hidden;
@@ -353,7 +347,7 @@ html, body {
   transition: background var(--tr-m);
 }
 
-/* ─── 10. TOP NAV ────────────────────────────────────────────── */
+/*  10. TOP NAV */
 #top-nav {
   display: flex; align-items: center;
   height: var(--nav-h);
@@ -425,7 +419,7 @@ html, body {
   color: var(--text-primary); font-family: var(--font-display);
 }
 
-/* ─── 11. MESSAGES SECTION ───────────────────────────────────── */
+/*  11. MESSAGES SECTION  */
 #messages-section {
   flex:1; overflow-y:auto; scroll-behavior:smooth;
 }
@@ -436,7 +430,7 @@ html, body {
   min-height: 100%; display:flex; flex-direction:column;
 }
 
-/* ─── 12. WELCOME SCREEN ─────────────────────────────────────── */
+/*  12. WELCOME SCREEN  */
 #welcome-screen {
   flex:1; display:flex; align-items:center;
   justify-content:center; padding: 44px 0;
@@ -515,7 +509,7 @@ html, body {
 }
 .card-body-text p { font-size: 12.5px; color: var(--text-secondary); line-height:1.5; margin:0; }
 
-/* ─── 13. MESSAGES ───────────────────────────────────────────── */
+/*  13. MESSAGES  */
 #chat-messages { display:flex; flex-direction:column; gap:22px; padding-bottom:8px; }
 
 .message { display:flex; gap:12px; animation: fadeInUp 0.32s var(--tr-m) both; }
@@ -577,7 +571,7 @@ html, body {
 }
 .user-message .message-bubble code { background:rgba(255,255,255,0.20); }
 
-/* ─── 14. TYPING INDICATOR ───────────────────────────────────── */
+/*  14. TYPING INDICATOR  */
 .typing-indicator { display:flex; align-items:flex-end; gap:12px; margin-bottom:8px; }
 .typing-indicator.hidden { display:none; }
 
@@ -601,7 +595,7 @@ html, body {
   font-style: italic; margin-left: 8px; letter-spacing:0.01em;
 }
 
-/* ─── 15. INPUT AREA ─────────────────────────────────────────── */
+/*  15. INPUT AREA  */
 #input-area {
   padding: 10px 20px 14px;
   background: var(--bg-main); border-top: 1px solid var(--border);
@@ -728,7 +722,7 @@ html, body {
 .input-footer-text i { color: var(--accent); font-size:11px; }
 .input-char-count { font-size:11px; color: var(--text-muted); font-weight:500; }
 
-/* ─── 16. ANIMATIONS ─────────────────────────────────────────── */
+/*  16. ANIMATIONS  */
 @keyframes fadeInUp {
   from { opacity:0; transform:translateY(14px); }
   to   { opacity:1; transform:translateY(0); }
@@ -761,7 +755,7 @@ html, body {
   50%      { box-shadow: 0 0 0 6px rgba(255,68,68,0); }
 }
 
-/* ─── 17. RESPONSIVE ─────────────────────────────────────────── */
+/*  17. RESPONSIVE  */
 @media (max-width: 768px) {
   #sidebar {
     position: fixed; left:0; top:0; bottom:0;
@@ -788,3 +782,235 @@ html, body {
 }
 
 .hidden { display:none !important; }
+
+/* NEW — SLIDE-IN SIDEBAR PANEL */
+
+/* Always show hamburger on all screen sizes */
+#hamburger-btn {
+  display: flex !important;
+}
+
+/* Panel itself — slides from left */
+#sidebar-panel {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 290px;
+  background: var(--bg-sidebar);
+  z-index: 300;
+  display: flex; flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.30s cubic-bezier(0.4,0,0.2,1);
+  box-shadow: 6px 0 40px rgba(0,0,0,0.45);
+  border-right: 1px solid rgba(0,207,200,0.12);
+}
+#sidebar-panel.open { transform: translateX(0); }
+
+/* Panel header */
+.sp-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 16px 14px;
+  border-bottom: 1px solid rgba(0,207,200,0.10);
+  flex-shrink: 0;
+}
+.sp-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-size: 19px; font-weight: 800;
+  color: #fff; letter-spacing: -0.3px;
+}
+.sp-logo {
+  width: 34px; height: 34px; object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(0,207,200,0.65));
+}
+.sp-ai { color: #00cfc8; text-shadow: 0 0 12px rgba(0,207,200,0.6); }
+
+#sp-close-btn {
+  background: none; border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.55); width: 30px; height: 30px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 14px;
+  transition: all 0.16s ease;
+}
+#sp-close-btn:hover { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.25); }
+
+/* Action buttons (New Chat, Search) */
+.sp-actions {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid rgba(0,207,200,0.08);
+  flex-shrink: 0;
+}
+.sp-action-btn {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; border: none; border-radius: var(--r-sm);
+  padding: 10px 14px;
+  font-family: var(--font-body); font-size: 14px; font-weight: 600;
+  cursor: pointer; letter-spacing: 0.02em;
+  transition: all 0.16s ease;
+}
+.sp-action-btn:first-child {
+  background: linear-gradient(135deg, #00cfc8 0%, #009e96 100%);
+  color: #fff;
+  box-shadow: 0 3px 14px rgba(0,207,200,0.35);
+}
+.sp-action-btn:first-child:hover {
+  background: linear-gradient(135deg, #00b8b2 0%, #008880 100%);
+  box-shadow: 0 5px 18px rgba(0,207,200,0.50);
+  transform: translateY(-1px);
+}
+.sp-action-btn:last-child {
+  background: rgba(0,207,200,0.08);
+  color: rgba(255,255,255,0.80);
+  border: 1px solid rgba(0,207,200,0.18);
+}
+.sp-action-btn:last-child:hover {
+  background: rgba(0,207,200,0.16);
+  color: #fff; border-color: rgba(0,207,200,0.35);
+}
+.sp-action-btn i { font-size: 14px; opacity: 0.85; }
+
+/* Search input box */
+.sp-search-box {
+  padding: 10px 14px 6px;
+  flex-shrink: 0;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.28s ease, opacity 0.22s ease, padding 0.22s ease;
+}
+.sp-search-box.open {
+  max-height: 80px;
+  opacity: 1;
+}
+.sp-search-input-wrap {
+  display: flex; align-items: center; gap: 9px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(0,207,200,0.20);
+  border-radius: var(--r-sm);
+  padding: 8px 12px;
+}
+.sp-search-input-wrap i { color: rgba(0,207,200,0.6); font-size: 13px; flex-shrink: 0; }
+#sp-search-input {
+  flex:1; background:none; border:none; outline:none;
+  color: rgba(255,255,255,0.85); font-family: var(--font-body);
+  font-size: 13.5px;
+}
+#sp-search-input::placeholder { color: rgba(255,255,255,0.30); }
+
+/* History list */
+.sp-history-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.9px;
+  text-transform: uppercase; color: rgba(255,255,255,0.30);
+  padding: 12px 16px 6px; flex-shrink: 0;
+}
+.sp-history-list {
+  list-style: none; flex:1; overflow-y: auto;
+  padding: 0 8px 16px; margin: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,207,200,0.15) transparent;
+}
+.sp-history-list::-webkit-scrollbar { width: 4px; }
+.sp-history-list::-webkit-scrollbar-thumb { background: rgba(0,207,200,0.18); border-radius: 4px; }
+
+.sp-history-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px; border-radius: var(--r-sm);
+  cursor: pointer; color: rgba(255,255,255,0.72);
+  transition: background 0.16s ease;
+  margin-bottom: 2px;
+}
+.sp-history-item i { font-size: 13px; opacity: 0.55; flex-shrink: 0; }
+.sp-history-item:hover { background: rgba(0,207,200,0.08); color: rgba(255,255,255,0.90); }
+.sp-history-item.active { background: rgba(0,207,200,0.16); color: #72fff8; }
+.sp-history-item.hidden-item { display: none; }
+
+.sp-item-info { flex:1; overflow:hidden; }
+.sp-item-title {
+  display: block; font-size: 13px; font-weight: 500;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.sp-item-time {
+  display: block; font-size: 11px; color: rgba(255,255,255,0.32);
+  margin-top: 2px;
+}
+
+/*  BOTTOM-LEFT PROFILE (outside sidebar, fixed corner) */
+#bottom-profile {
+  position: fixed;
+  left: 0; bottom: 0;
+  width: 268px;
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px 16px;
+  background: var(--bg-sidebar);
+  border-top: 1px solid rgba(0,207,200,0.10);
+  border-right: 1px solid rgba(0,207,200,0.06);
+  z-index: 10;
+  transition: transform 0.30s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Keep bottom-profile visible even when panel is open */
+#bottom-profile .user-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, #00cfc8, #007878);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-family: var(--font-display);
+  font-weight: 800; font-size: 16px;
+  border: 2px solid rgba(0,207,200,0.4);
+  box-shadow: 0 0 14px rgba(0,207,200,0.35);
+}
+#bottom-profile .user-status-dot {
+  position: absolute; bottom: 1px; right: 1px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #22dd88;
+  border: 2px solid var(--bg-sidebar);
+  box-shadow: 0 0 6px rgba(34,221,136,0.6);
+}
+#bottom-profile .user-avatar-wrap { position: relative; flex-shrink: 0; }
+#bottom-profile .user-info { flex:1; overflow: hidden; }
+#bottom-profile .user-name {
+  display: block; font-size: 13.5px; font-weight: 700;
+  font-family: var(--font-display); color: #fff;
+  letter-spacing: 0.02em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#bottom-profile .user-plan {
+  display: block; font-size: 11px;
+  color: rgba(255,255,255,0.38);
+  margin-top: 1px;
+}
+#bottom-profile .user-plan i { color: #00cfc8; font-size: 10px; }
+#bottom-profile .theme-toggle-btn {
+  background: none;
+  border: 1px solid rgba(0,207,200,0.22);
+  color: rgba(0,207,200,0.65);
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 13px; flex-shrink: 0;
+  transition: all 0.16s ease;
+}
+#bottom-profile .theme-toggle-btn:hover {
+  background: rgba(0,207,200,0.12); color: #72fff8;
+  border-color: rgba(0,207,200,0.5);
+}
+
+/* Move bottom-profile up with panel (so it stays below panel when panel opens) */
+#sidebar-panel.open ~ * #bottom-profile { left: 290px; }
+
+/* Adjust main content left padding so it doesn't go behind bottom-profile */
+#main-content { padding-bottom: 0; }
+
+/* On small screens bottom-profile goes full width */
+@media (max-width: 480px) {
+  #bottom-profile { width: 100%; border-right: none; }
+}
+
+/* Dark mode: sidebar panel background uses same dark bg variable */
+body.dark-mode #sidebar-panel,
+body.dark-mode #bottom-profile {
+  background: #061414;
+  border-color: rgba(0,207,200,0.08);
+}
+
+/*  Remove old sidebar #sidebar rule interference  */
+#sidebar { display: none !important; }
+

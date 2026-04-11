@@ -17,19 +17,15 @@
   <div id="intro-splash">
     <div class="splash-bg"></div>
     <canvas id="splash-canvas"></canvas>
-
     <div class="splash-center" id="splash-center">
       <div class="splash-glow-ring"></div>
-
       <div class="splash-logo-wrap" id="splash-logo-wrap">
         <img id="kutty-splash-img" src="images/kuttyai-logo.png" alt="KuttyAI Logo"/>
       </div>
-
       <div class="splash-brand" id="splash-brand">
         <span class="sb-kutty">Kutty</span><span class="sb-ai">.AI</span>
       </div>
       <div class="splash-tagline" id="splash-tagline">Your Intelligent Chat Companion</div>
-
       <div class="splash-loader-wrap" id="splash-loader-wrap">
         <div class="splash-loader-bar" id="splash-loader-bar"></div>
       </div>
@@ -41,64 +37,136 @@
   ══════════════════════════════════════════ -->
   <div id="app" class="app-hidden">
 
-    <!-- SIDEBAR -->
-    <aside id="sidebar">
-      <div class="sidebar-header">
-        <div class="brand">
-          <div class="brand-icon-wrap">
-            <img src="images/kuttyai-logo.png" alt="KuttyAI" class="brand-logo-img"/>
-          </div>
-          <span class="brand-name">Kutty<span class="brand-ai-dot">.AI</span></span>
+    <!-- ── SLIDE-IN SIDEBAR PANEL ──────────────────────────── -->
+    <div id="sidebar-panel">
+      <div class="sp-header">
+        <div class="sp-brand">
+          <img src="images/kuttyai-logo.png" alt="KuttyAI" class="sp-logo"/>
+          <span>Kutty<span class="sp-ai">.AI</span></span>
         </div>
-        <button id="new-chat-btn" class="new-chat-btn">
-          <i class="fa-solid fa-plus"></i>
-          <span>New Chat</span>
+        <button id="sp-close-btn" title="Close" aria-label="Close sidebar">
+          <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <!-- Chat history hidden -->
-      <div class="sidebar-history"></div>
+      <!-- Action buttons -->
+      <div class="sp-actions">
+        <button class="sp-action-btn" id="sp-new-chat-btn">
+          <i class="fa-solid fa-plus"></i>
+          <span>New Chat</span>
+        </button>
+        <button class="sp-action-btn" id="sp-search-toggle-btn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Search Chats</span>
+        </button>
+      </div>
 
-      <div class="sidebar-footer">
-        <div class="user-profile">
-          <div class="user-avatar-wrap">
-            <div class="user-avatar">H</div>
-            <span class="user-status-dot"></span>
-          </div>
-          <div class="user-info">
-            <span class="user-name">Husen</span>
-            <span class="user-plan"><i class="fa-solid fa-circle-check"></i> Free Plan</span>
-          </div>
-          <button class="theme-toggle-btn" id="theme-toggle" title="Toggle theme">
-            <i class="fa-solid fa-moon" id="theme-icon"></i>
-          </button>
+      <!-- Search box (hidden by default) -->
+      <div class="sp-search-box" id="sp-search-box">
+        <div class="sp-search-input-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="sp-search-input" placeholder="Search conversations…" autocomplete="off"/>
         </div>
       </div>
-    </aside>
 
+      <!-- Chat history list -->
+      <div class="sp-history-label">Recent Chats</div>
+      <ul class="sp-history-list" id="sp-history-list">
+        <li class="sp-history-item active" data-chat="1">
+          <i class="fa-regular fa-message"></i>
+          <div class="sp-item-info">
+            <span class="sp-item-title">Getting started with AI</span>
+            <span class="sp-item-time">Today</span>
+          </div>
+        </li>
+        <li class="sp-history-item" data-chat="2">
+          <i class="fa-regular fa-message"></i>
+          <div class="sp-item-info">
+            <span class="sp-item-title">Python list sorting help</span>
+            <span class="sp-item-time">Yesterday</span>
+          </div>
+        </li>
+        <li class="sp-history-item" data-chat="3">
+          <i class="fa-regular fa-message"></i>
+          <div class="sp-item-info">
+            <span class="sp-item-title">Essay writing techniques</span>
+            <span class="sp-item-time">Yesterday</span>
+          </div>
+        </li>
+        <li class="sp-history-item" data-chat="4">
+          <i class="fa-regular fa-message"></i>
+          <div class="sp-item-info">
+            <span class="sp-item-title">Data analysis best practices</span>
+            <span class="sp-item-time">Apr 10</span>
+          </div>
+        </li>
+        <li class="sp-history-item" data-chat="5">
+          <i class="fa-regular fa-message"></i>
+          <div class="sp-item-info">
+            <span class="sp-item-title">Machine learning concepts</span>
+            <span class="sp-item-time">Apr 9</span>
+          </div>
+        </li>
+        <li class="sp-history-item" data-chat="6">
+          <i class="fa-regular fa-message"></i>
+          <div class="sp-item-info">
+            <span class="sp-item-title">Creative story brainstorm</span>
+            <span class="sp-item-time">Apr 8</span>
+          </div>
+        </li>
+        <li class="sp-history-item" data-chat="7">
+          <i class="fa-regular fa-message"></i>
+          <div class="sp-item-info">
+            <span class="sp-item-title">React component design</span>
+            <span class="sp-item-time">Apr 7</span>
+          </div>
+        </li>
+        <li class="sp-history-item" data-chat="8">
+          <i class="fa-regular fa-message"></i>
+          <div class="sp-item-info">
+            <span class="sp-item-title">Career advice questions</span>
+            <span class="sp-item-time">Apr 6</span>
+          </div>
+        </li>
+        <li class="sp-history-item" data-chat="9">
+          <i class="fa-regular fa-message"></i>
+          <div class="sp-item-info">
+            <span class="sp-item-title">SQL query optimisation</span>
+            <span class="sp-item-time">Apr 5</span>
+          </div>
+        </li>
+        <li class="sp-history-item" data-chat="10">
+          <i class="fa-regular fa-message"></i>
+          <div class="sp-item-info">
+            <span class="sp-item-title">Resume review feedback</span>
+            <span class="sp-item-time">Apr 4</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- PANEL OVERLAY -->
     <div id="sidebar-overlay"></div>
 
-    <!-- MAIN CONTENT -->
+    <!-- ── MAIN CONTENT ─────────────────────────────────────── -->
     <main id="main-content">
 
       <!-- TOP NAV -->
       <header id="top-nav">
+        <!-- Hamburger / 3-line toggle -->
         <button id="hamburger-btn" aria-label="Toggle sidebar">
           <i class="fa-solid fa-bars"></i>
         </button>
+
         <div class="nav-brand-wrap">
           <img src="images/kuttyai-logo.png" alt="KuttyAI" class="nav-logo-img"/>
           <div class="nav-title">Kutty<span class="nav-ai">.AI</span></div>
         </div>
+
+        <!-- Only export — no Husen chip here -->
         <div class="nav-actions">
           <button class="nav-action-btn" id="export-btn" title="Export conversation">
             <i class="fa-solid fa-file-arrow-down"></i>
           </button>
-          <div class="nav-divider"></div>
-          <div class="nav-user-chip">
-            <div class="nav-user-dot">H</div>
-            <span>Husen</span>
-          </div>
         </div>
       </header>
 
@@ -167,8 +235,6 @@
 
       <!-- INPUT AREA -->
       <footer id="input-area">
-
-        <!-- Voice recording banner (shown when recording) -->
         <div id="voice-banner" class="voice-banner hidden">
           <div class="voice-wave">
             <span></span><span></span><span></span><span></span><span></span>
@@ -181,25 +247,13 @@
         </div>
 
         <div class="input-container">
-          <!-- Attach -->
           <button class="input-action-btn attach-btn" title="Attach file" aria-label="Attach file">
             <i class="fa-solid fa-paperclip"></i>
           </button>
-
-          <!-- Textarea -->
-          <textarea
-            id="message-input"
-            placeholder="Message KuttyAI…"
-            rows="1"
-            aria-label="Message input"
-          ></textarea>
-
-          <!-- Voice / Mic button -->
+          <textarea id="message-input" placeholder="Message KuttyAI…" rows="1" aria-label="Message input"></textarea>
           <button class="input-action-btn mic-btn" id="mic-btn" title="Voice input" aria-label="Voice input">
             <i class="fa-solid fa-microphone" id="mic-icon"></i>
           </button>
-
-          <!-- Send -->
           <button id="send-btn" class="send-btn" disabled title="Send message" aria-label="Send">
             <i class="fa-solid fa-paper-plane"></i>
           </button>
@@ -215,7 +269,23 @@
       </footer>
 
     </main>
-  </div>
+
+    <!-- ── BOTTOM-LEFT PROFILE (sidebar replaced by panel, keep profile here) -->
+    <div id="bottom-profile">
+      <div class="user-avatar-wrap">
+        <div class="user-avatar">H</div>
+        <span class="user-status-dot"></span>
+      </div>
+      <div class="user-info">
+        <span class="user-name">Husen</span>
+        <span class="user-plan"><i class="fa-solid fa-circle-check"></i> Free Plan</span>
+      </div>
+      <button class="theme-toggle-btn" id="theme-toggle" title="Toggle theme">
+        <i class="fa-solid fa-moon" id="theme-icon"></i>
+      </button>
+    </div>
+
+  </div><!-- end #app -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
