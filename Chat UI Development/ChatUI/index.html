@@ -4,90 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KuttyAI — Intelligent Assistant</title>
-
-  <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
-  <!-- Google Fonts: Nunito (Calibri-feel body) + Exo 2 (futuristic display) -->
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Exo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Exo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-  <!-- ════════════════════════════════════════
-       INTRO SPLASH SCREEN
-  ════════════════════════════════════════ -->
+  <!-- ══════════════════════════════════════════
+       INTRO SPLASH
+  ══════════════════════════════════════════ -->
   <div id="intro-splash">
-    <!-- Animated dark-teal background -->
     <div class="splash-bg"></div>
-    <!-- Particle dots -->
     <canvas id="splash-canvas"></canvas>
 
-    <!-- Centre logo group -->
     <div class="splash-center" id="splash-center">
-      <!-- Pulsing glow ring behind logo -->
       <div class="splash-glow-ring"></div>
 
-      <!-- KuttyAI Logo SVG -->
       <div class="splash-logo-wrap" id="splash-logo-wrap">
-        <svg id="kutty-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="tG" cx="50%" cy="50%" r="65%">
-              <stop offset="0%"   stop-color="#72fff8"/>
-              <stop offset="45%"  stop-color="#00d4cc"/>
-              <stop offset="100%" stop-color="#008f8f"/>
-            </radialGradient>
-            <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="5" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <filter id="outerGlow" x="-60%" y="-60%" width="220%" height="220%">
-              <feGaussianBlur stdDeviation="10" result="b2"/>
-              <feMerge><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-
-          <!-- Outer triangle frame -->
-          <path d="M100 14 L188 164 L12 164 Z"
-                fill="none" stroke="url(#tG)" stroke-width="5"
-                stroke-linejoin="round" opacity="0.55" filter="url(#outerGlow)"/>
-
-          <!-- Inner triangle frame -->
-          <path d="M100 34 L172 157 L28 157 Z"
-                fill="none" stroke="url(#tG)" stroke-width="3.5"
-                stroke-linejoin="round" opacity="0.80" filter="url(#glow)"/>
-
-          <!-- Lightning arrow bolt -->
-          <path d="M90 58 L66 108 L96 108 L76 152 L136 96 L104 96 L124 58 Z"
-                fill="url(#tG)" filter="url(#glow)" opacity="0.97"/>
-
-          <!-- Corner accent dots -->
-          <circle cx="100" cy="14"  r="4.5" fill="#72fff8" opacity="0.95" filter="url(#glow)"/>
-          <circle cx="188" cy="164" r="4.5" fill="#72fff8" opacity="0.95" filter="url(#glow)"/>
-          <circle cx="12"  cy="164" r="4.5" fill="#72fff8" opacity="0.95" filter="url(#glow)"/>
-        </svg>
+        <img id="kutty-splash-img" src="images/kuttyai-logo.png" alt="KuttyAI Logo"/>
       </div>
 
-      <!-- Brand name -->
       <div class="splash-brand" id="splash-brand">
         <span class="sb-kutty">Kutty</span><span class="sb-ai">.AI</span>
       </div>
       <div class="splash-tagline" id="splash-tagline">Your Intelligent Chat Companion</div>
 
-      <!-- Loading bar -->
       <div class="splash-loader-wrap" id="splash-loader-wrap">
         <div class="splash-loader-bar" id="splash-loader-bar"></div>
       </div>
     </div>
   </div>
-  <!-- END SPLASH -->
 
-
-  <!-- ════════════════════════════════════════
-       MAIN APP (hidden until splash finishes)
-  ════════════════════════════════════════ -->
+  <!-- ══════════════════════════════════════════
+       MAIN APP
+  ══════════════════════════════════════════ -->
   <div id="app" class="app-hidden">
 
     <!-- SIDEBAR -->
@@ -95,16 +46,7 @@
       <div class="sidebar-header">
         <div class="brand">
           <div class="brand-icon-wrap">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
-              <defs>
-                <radialGradient id="tG2" cx="50%" cy="50%" r="65%">
-                  <stop offset="0%" stop-color="#72fff8"/>
-                  <stop offset="100%" stop-color="#00a8a8"/>
-                </radialGradient>
-              </defs>
-              <path d="M100 14 L188 164 L12 164 Z" fill="none" stroke="url(#tG2)" stroke-width="8" stroke-linejoin="round" opacity="0.7"/>
-              <path d="M90 58 L66 108 L96 108 L76 152 L136 96 L104 96 L124 58 Z" fill="url(#tG2)" opacity="0.95"/>
-            </svg>
+            <img src="images/kuttyai-logo.png" alt="KuttyAI" class="brand-logo-img"/>
           </div>
           <span class="brand-name">Kutty<span class="brand-ai-dot">.AI</span></span>
         </div>
@@ -114,48 +56,26 @@
         </button>
       </div>
 
-      <div class="sidebar-history">
-        <p class="history-label">Recent Chats</p>
-        <ul id="chat-history-list">
-          <li class="history-item active">
-            <i class="fa-regular fa-message"></i>
-            <span>Getting started with AI</span>
-          </li>
-          <li class="history-item">
-            <i class="fa-regular fa-message"></i>
-            <span>Python code review</span>
-          </li>
-          <li class="history-item">
-            <i class="fa-regular fa-message"></i>
-            <span>Essay writing tips</span>
-          </li>
-          <li class="history-item">
-            <i class="fa-regular fa-message"></i>
-            <span>Data analysis help</span>
-          </li>
-          <li class="history-item">
-            <i class="fa-regular fa-message"></i>
-            <span>Creative story ideas</span>
-          </li>
-        </ul>
-      </div>
+      <!-- Chat history hidden -->
+      <div class="sidebar-history"></div>
 
       <div class="sidebar-footer">
         <div class="user-profile">
-          <!-- Husen avatar -->
-          <div class="user-avatar">H</div>
+          <div class="user-avatar-wrap">
+            <div class="user-avatar">H</div>
+            <span class="user-status-dot"></span>
+          </div>
           <div class="user-info">
             <span class="user-name">Husen</span>
-            <span class="user-plan">Free Plan</span>
+            <span class="user-plan"><i class="fa-solid fa-circle-check"></i> Free Plan</span>
           </div>
-          <button class="theme-toggle-btn" id="theme-toggle" title="Toggle dark/light mode">
+          <button class="theme-toggle-btn" id="theme-toggle" title="Toggle theme">
             <i class="fa-solid fa-moon" id="theme-icon"></i>
           </button>
         </div>
       </div>
     </aside>
 
-    <!-- Overlay (mobile) -->
     <div id="sidebar-overlay"></div>
 
     <!-- MAIN CONTENT -->
@@ -167,51 +87,34 @@
           <i class="fa-solid fa-bars"></i>
         </button>
         <div class="nav-brand-wrap">
-          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="nav-logo-svg">
-            <defs>
-              <radialGradient id="tG3" cx="50%" cy="50%" r="65%">
-                <stop offset="0%" stop-color="#72fff8"/>
-                <stop offset="100%" stop-color="#00a8a8"/>
-              </radialGradient>
-            </defs>
-            <path d="M100 14 L188 164 L12 164 Z" fill="none" stroke="url(#tG3)" stroke-width="9" stroke-linejoin="round" opacity="0.75"/>
-            <path d="M90 58 L66 108 L96 108 L76 152 L136 96 L104 96 L124 58 Z" fill="url(#tG3)" opacity="0.95"/>
-          </svg>
+          <img src="images/kuttyai-logo.png" alt="KuttyAI" class="nav-logo-img"/>
           <div class="nav-title">Kutty<span class="nav-ai">.AI</span></div>
         </div>
         <div class="nav-actions">
-          <button class="nav-export-btn" id="export-btn" title="Export chat">
+          <button class="nav-action-btn" id="export-btn" title="Export conversation">
             <i class="fa-solid fa-file-arrow-down"></i>
           </button>
+          <div class="nav-divider"></div>
+          <div class="nav-user-chip">
+            <div class="nav-user-dot">H</div>
+            <span>Husen</span>
+          </div>
         </div>
       </header>
 
-      <!-- MESSAGES SECTION -->
+      <!-- MESSAGES -->
       <section id="messages-section">
         <div id="messages-wrapper">
 
-          <!-- WELCOME SCREEN -->
+          <!-- WELCOME -->
           <div id="welcome-screen">
             <div class="welcome-content">
-              <div class="welcome-logo">
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="56" height="56">
-                  <defs>
-                    <radialGradient id="tG4" cx="50%" cy="50%" r="65%">
-                      <stop offset="0%"   stop-color="#72fff8"/>
-                      <stop offset="50%"  stop-color="#00d4cc"/>
-                      <stop offset="100%" stop-color="#008f8f"/>
-                    </radialGradient>
-                    <filter id="glow3" x="-40%" y="-40%" width="180%" height="180%">
-                      <feGaussianBlur stdDeviation="4" result="b"/>
-                      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                    </filter>
-                  </defs>
-                  <path d="M100 14 L188 164 L12 164 Z" fill="none" stroke="url(#tG4)" stroke-width="7" stroke-linejoin="round" opacity="0.6" filter="url(#glow3)"/>
-                  <path d="M90 58 L66 108 L96 108 L76 152 L136 96 L104 96 L124 58 Z" fill="url(#tG4)" filter="url(#glow3)"/>
-                </svg>
+              <div class="welcome-logo-wrap">
+                <div class="welcome-logo-glow"></div>
+                <img src="images/kuttyai-logo.png" alt="KuttyAI" class="welcome-logo-img"/>
               </div>
               <h1 class="welcome-title">Hello, Husen <span class="wave">👋</span></h1>
-              <p class="welcome-sub">What would you like to explore today?</p>
+              <p class="welcome-sub">How can KuttyAI assist you today?</p>
 
               <div class="suggestion-grid">
                 <div class="suggestion-card" data-prompt="Explain machine learning in simple terms">
@@ -251,9 +154,12 @@
 
           <!-- TYPING INDICATOR -->
           <div id="typing-indicator" class="typing-indicator hidden">
-            <div class="message-avatar ai-avatar">K</div>
+            <div class="message-avatar ai-avatar">
+              <img src="images/kuttyai-logo.png" alt="K" class="avatar-logo-img"/>
+            </div>
             <div class="typing-bubble">
               <span></span><span></span><span></span>
+              <span class="typing-label">KuttyAI is thinking…</span>
             </div>
           </div>
         </div>
@@ -261,26 +167,55 @@
 
       <!-- INPUT AREA -->
       <footer id="input-area">
+
+        <!-- Voice recording banner (shown when recording) -->
+        <div id="voice-banner" class="voice-banner hidden">
+          <div class="voice-wave">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span class="voice-status-text" id="voice-status-text">Listening…</span>
+          <button class="voice-cancel-btn" id="voice-cancel-btn" title="Cancel recording">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
         <div class="input-container">
-          <button class="attach-btn" title="Attach file" aria-label="Attach file">
+          <!-- Attach -->
+          <button class="input-action-btn attach-btn" title="Attach file" aria-label="Attach file">
             <i class="fa-solid fa-paperclip"></i>
           </button>
+
+          <!-- Textarea -->
           <textarea
             id="message-input"
             placeholder="Message KuttyAI…"
             rows="1"
             aria-label="Message input"
           ></textarea>
+
+          <!-- Voice / Mic button -->
+          <button class="input-action-btn mic-btn" id="mic-btn" title="Voice input" aria-label="Voice input">
+            <i class="fa-solid fa-microphone" id="mic-icon"></i>
+          </button>
+
+          <!-- Send -->
           <button id="send-btn" class="send-btn" disabled title="Send message" aria-label="Send">
             <i class="fa-solid fa-paper-plane"></i>
           </button>
         </div>
-        <p class="input-footer-text">KuttyAI may make mistakes. Please verify important information.</p>
+
+        <div class="input-footer-row">
+          <span class="input-footer-text">
+            <i class="fa-solid fa-shield-halved"></i>
+            KuttyAI may make mistakes. Always verify important information.
+          </span>
+          <span class="input-char-count" id="char-count"></span>
+        </div>
       </footer>
 
     </main>
   </div>
-  <!-- END APP -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
