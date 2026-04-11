@@ -1,22 +1,5 @@
-/**
- * KuttyAI — chat.js  (Professional Edition)
- * Author  : Husen
- * Stack   : JavaScript ES6+ · jQuery 3.7
- *
- * Features:
- *   • Splash intro animation with canvas particles
- *   • Voice / Speech-to-Text input (Web Speech API)
- *   • Smart message rendering with markdown formatting
- *   • Typing indicator with realistic delay
- *   • Dark mode with localStorage persistence
- *   • Export chat as .txt via Blob API
- *   • Character counter
- *   • Mobile sidebar
- */
 
-/* ══════════════════════════════════════════════════════
-   1.  SPLASH ANIMATION
-   ══════════════════════════════════════════════════════ */
+/* 1.  SPLASH ANIMATION */
 (function runSplash () {
 
   const canvas = document.getElementById('splash-canvas');
@@ -85,9 +68,7 @@
 })();
 
 
-/* ══════════════════════════════════════════════════════
-   2.  APP — jQuery ready
-   ══════════════════════════════════════════════════════ */
+/*  2.  APP — jQuery ready */
 $(function () {
 
   /* ── AI Response Pool ── */
@@ -106,7 +87,7 @@ $(function () {
   let isRecording  = false;
   let recognition  = null;
 
-  /* ── Voice Support Detection ── */
+  /*Voice Support Detection  */
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const voiceSupported    = !!SpeechRecognition;
 
@@ -116,9 +97,7 @@ $(function () {
   }
 
 
-  /* ════════════════════════════════════════════════════
-     3.  HELPERS
-  ════════════════════════════════════════════════════ */
+  /*  3.  HELPERS */
 
   function timestamp () {
     const n = new Date();
@@ -134,10 +113,7 @@ $(function () {
     $s.animate({ scrollTop: $s[0].scrollHeight }, 260);
   }
 
-  /**
-   * Lightweight markdown formatter:
-   * ```block```, `inline`, **bold**, *italic*, \n → <br>
-   */
+  
   function fmt (txt) {
     txt = txt.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
     txt = txt.replace(/`([^`]+)`/g, '<code>$1</code>');
@@ -153,9 +129,7 @@ $(function () {
   }
 
 
-  /* ════════════════════════════════════════════════════
-     4.  ADD MESSAGE
-  ════════════════════════════════════════════════════ */
+  /*  4.  ADD MESSAGE */
   function addMessage (text, sender) {
     const isUser    = sender === 'user';
     const cls       = isUser ? 'user-message' : 'ai-message';
@@ -184,9 +158,7 @@ $(function () {
   }
 
 
-  /* ════════════════════════════════════════════════════
-     5.  SEND MESSAGE
-  ════════════════════════════════════════════════════ */
+  /* 5.  SEND MESSAGE */
   function sendMessage () {
     const text = $('#message-input').val().trim();
     if (!text) return;
@@ -207,16 +179,12 @@ $(function () {
   }
 
 
-  /* ════════════════════════════════════════════════════
-     6.  TYPING INDICATOR
-  ════════════════════════════════════════════════════ */
+  /*  6.  TYPING INDICATOR */
   function showTyping () { $('#typing-indicator').removeClass('hidden'); scrollBottom(); }
   function hideTyping () { $('#typing-indicator').addClass('hidden'); }
 
 
-  /* ════════════════════════════════════════════════════
-     7.  INPUT HANDLING
-  ════════════════════════════════════════════════════ */
+  /*    7.  INPUT HANDLING */
   function autoResize () {
     const ta = document.getElementById('message-input');
     ta.style.height = 'auto';
@@ -236,9 +204,7 @@ $(function () {
   $('#send-btn').on('click', sendMessage);
 
 
-  /* ════════════════════════════════════════════════════
-     8.  VOICE / SPEECH INPUT
-  ════════════════════════════════════════════════════ */
+  /* 8.  VOICE / SPEECH INPUT  */
 
   function startRecording () {
     if (!voiceSupported || isRecording) return;
@@ -326,18 +292,14 @@ $(function () {
   });
 
 
-  /* ════════════════════════════════════════════════════
-     9.  SUGGESTION CARDS
-  ════════════════════════════════════════════════════ */
+  /* 9.  SUGGESTION CARDS */
   $(document).on('click', '.suggestion-card', function () {
     $('#message-input').val($(this).data('prompt')).trigger('input').focus();
     sendMessage();
   });
 
 
-  /* ════════════════════════════════════════════════════
-    10.  SIDEBAR PANEL
-  ════════════════════════════════════════════════════ */
+  /*  10.  SIDEBAR PANEL */
   function openPanel () {
     $('#sidebar-panel').addClass('open');
     $('#sidebar-overlay').addClass('active');
@@ -392,9 +354,7 @@ $(function () {
   });
 
 
-  /* ════════════════════════════════════════════════════
-    11.  RESET CHAT
-  ════════════════════════════════════════════════════ */
+  /* 11.  RESET CHAT */
   function resetChat () {
     $('#chat-messages').empty();
     hideTyping();
@@ -408,9 +368,7 @@ $(function () {
   }
 
 
-  /* ════════════════════════════════════════════════════
-    12.  DARK MODE
-  ════════════════════════════════════════════════════ */
+  /* 12.  DARK MODE  */
   (function initTheme () {
     if (localStorage.getItem('kuttyai-theme') === 'dark') {
       $('body').addClass('dark-mode');
@@ -425,9 +383,7 @@ $(function () {
   });
 
 
-  /* ════════════════════════════════════════════════════
-    13.  EXPORT CHAT
-  ════════════════════════════════════════════════════ */
+  /* 13.  EXPORT CHAT */
   $('#export-btn').on('click', function () {
     const $msgs = $('#chat-messages .message');
     if (!$msgs.length) { alert('No messages to export yet. Start a conversation first!'); return; }
@@ -454,9 +410,7 @@ $(function () {
   });
 
 
-  /* ════════════════════════════════════════════════════
-    14.  INIT
-  ════════════════════════════════════════════════════ */
+  /* 14.  INIT */
   if (window.innerWidth > 768) {
     setTimeout(() => $('#message-input').focus(), 2700);
   }
