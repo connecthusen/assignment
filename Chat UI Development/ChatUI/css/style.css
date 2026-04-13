@@ -1,5 +1,11 @@
+/* ============================================================
+   KuttyAI — style.css  (Professional Edition)
+   Author  : Husen
+   Stack   : HTML5 · CSS3 · Bootstrap 5 · jQuery
+   Fonts   : Nunito (Calibri-feel) + Exo 2 (display)
+   ============================================================ */
 
-/* 1. CSS VARIABLES  */
+/* ─── 1. CSS VARIABLES ───────────────────────────────────────── */
 :root {
   --accent:           #00cfc8;
   --accent-2:         #00a8a0;
@@ -70,7 +76,7 @@ body.dark-mode {
   --shadow-input:  0 2px 16px rgba(0,0,0,0.35);
 }
 
-/*  2. RESET & BASE  */
+/* ─── 2. RESET & BASE ────────────────────────────────────────── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 html, body {
@@ -84,13 +90,13 @@ html, body {
   letter-spacing: 0.012em;
 }
 
-/*  3. CUSTOM SCROLLBAR  */
+/* ─── 3. CUSTOM SCROLLBAR ────────────────────────────────────── */
 * { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
 
-/*  4. SPLASH SCREEN  */
+/* ─── 4. SPLASH SCREEN ───────────────────────────────────────── */
 #intro-splash {
   position: fixed; inset: 0; z-index: 9999;
   display: flex; align-items: center; justify-content: center;
@@ -181,7 +187,7 @@ html, body {
   animation: logoFly 0.6s cubic-bezier(0.4,0,0.2,1) forwards !important;
 }
 
-/*  5. SPLASH KEYFRAMES */
+/* ─── 5. SPLASH KEYFRAMES ────────────────────────────────────── */
 @keyframes splashAppear {
   from { opacity:0; transform: scale(0.35) rotate(-20deg); }
   to   { opacity:1; transform: scale(1)    rotate(0deg); }
@@ -208,7 +214,7 @@ html, body {
   100% { transform: scale(0.15) translate(-400px, -340px); opacity:0; }
 }
 
-/*  6. APP LAYOUT  */
+/* ─── 6. APP LAYOUT ──────────────────────────────────────────── */
 #app { display:flex; height:100vh; overflow:hidden; }
 .app-hidden  { visibility:hidden; opacity:0; }
 .app-visible { visibility:visible; opacity:1; animation: appReveal 0.5s ease both; }
@@ -218,7 +224,7 @@ html, body {
   to   { opacity:1; transform: translateY(0); }
 }
 
-/*  7. SIDEBAR */
+/* ─── 7. SIDEBAR ─────────────────────────────────────────────── */
 #sidebar {
   width: var(--sidebar-w); min-width: var(--sidebar-w);
   height: 100vh; background: var(--bg-sidebar);
@@ -331,7 +337,7 @@ html, body {
   border-color: rgba(0,207,200,0.5);
 }
 
-/*  8. OVERLAY  */
+/* ─── 8. OVERLAY ─────────────────────────────────────────────── */
 #sidebar-overlay {
   display: none; position: fixed; inset: 0;
   background: rgba(0,0,0,0.55); z-index: 150;
@@ -339,7 +345,7 @@ html, body {
 }
 #sidebar-overlay.active { display: block; }
 
-/*  9. MAIN CONTENT  */
+/* ─── 9. MAIN CONTENT ────────────────────────────────────────── */
 #main-content {
   flex:1; display:flex; flex-direction:column;
   height:100vh; overflow:hidden;
@@ -347,7 +353,7 @@ html, body {
   transition: background var(--tr-m);
 }
 
-/*  10. TOP NAV */
+/* ─── 10. TOP NAV ────────────────────────────────────────────── */
 #top-nav {
   display: flex; align-items: center;
   height: var(--nav-h);
@@ -419,7 +425,7 @@ html, body {
   color: var(--text-primary); font-family: var(--font-display);
 }
 
-/*  11. MESSAGES SECTION  */
+/* ─── 11. MESSAGES SECTION ───────────────────────────────────── */
 #messages-section {
   flex:1; overflow-y:auto; scroll-behavior:smooth;
 }
@@ -430,7 +436,7 @@ html, body {
   min-height: 100%; display:flex; flex-direction:column;
 }
 
-/*  12. WELCOME SCREEN  */
+/* ─── 12. WELCOME SCREEN ─────────────────────────────────────── */
 #welcome-screen {
   flex:1; display:flex; align-items:center;
   justify-content:center; padding: 44px 0;
@@ -509,7 +515,7 @@ html, body {
 }
 .card-body-text p { font-size: 12.5px; color: var(--text-secondary); line-height:1.5; margin:0; }
 
-/*  13. MESSAGES  */
+/* ─── 13. MESSAGES ───────────────────────────────────────────── */
 #chat-messages { display:flex; flex-direction:column; gap:22px; padding-bottom:8px; }
 
 .message { display:flex; gap:12px; animation: fadeInUp 0.32s var(--tr-m) both; }
@@ -571,7 +577,7 @@ html, body {
 }
 .user-message .message-bubble code { background:rgba(255,255,255,0.20); }
 
-/*  14. TYPING INDICATOR  */
+/* ─── 14. TYPING INDICATOR ───────────────────────────────────── */
 .typing-indicator { display:flex; align-items:flex-end; gap:12px; margin-bottom:8px; }
 .typing-indicator.hidden { display:none; }
 
@@ -595,7 +601,7 @@ html, body {
   font-style: italic; margin-left: 8px; letter-spacing:0.01em;
 }
 
-/*  15. INPUT AREA  */
+/* ─── 15. INPUT AREA ─────────────────────────────────────────── */
 #input-area {
   padding: 10px 20px 14px;
   background: var(--bg-main); border-top: 1px solid var(--border);
@@ -722,7 +728,7 @@ html, body {
 .input-footer-text i { color: var(--accent); font-size:11px; }
 .input-char-count { font-size:11px; color: var(--text-muted); font-weight:500; }
 
-/*  16. ANIMATIONS  */
+/* ─── 16. ANIMATIONS ─────────────────────────────────────────── */
 @keyframes fadeInUp {
   from { opacity:0; transform:translateY(14px); }
   to   { opacity:1; transform:translateY(0); }
@@ -755,7 +761,7 @@ html, body {
   50%      { box-shadow: 0 0 0 6px rgba(255,68,68,0); }
 }
 
-/*  17. RESPONSIVE  */
+/* ─── 17. RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 768px) {
   #sidebar {
     position: fixed; left:0; top:0; bottom:0;
@@ -783,7 +789,9 @@ html, body {
 
 .hidden { display:none !important; }
 
-/* NEW — SLIDE-IN SIDEBAR PANEL */
+/* ══════════════════════════════════════════════════════════════
+   NEW — SLIDE-IN SIDEBAR PANEL
+   ══════════════════════════════════════════════════════════════ */
 
 /* Always show hamburger on all screen sizes */
 #hamburger-btn {
@@ -934,7 +942,7 @@ html, body {
   margin-top: 2px;
 }
 
-/*  BOTTOM-LEFT PROFILE (outside sidebar, fixed corner) */
+/* ── BOTTOM-LEFT PROFILE (outside sidebar, fixed corner) ─────── */
 #bottom-profile {
   position: fixed;
   left: 0; bottom: 0;
@@ -1011,6 +1019,284 @@ body.dark-mode #bottom-profile {
   border-color: rgba(0,207,200,0.08);
 }
 
-/*  Remove old sidebar #sidebar rule interference  */
+/* ── Remove old sidebar #sidebar rule interference ─────────── */
 #sidebar { display: none !important; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   FINE-TUNE UPDATE
+   1. Husen profile inside sidebar panel
+   2. Model dropdown (top-right nav)
+   3. Input focus highlight
+   4. Hide old bottom-profile
+   ══════════════════════════════════════════════════════════════ */
+
+/* Hide old fixed bottom-profile (moved inside panel) */
+#bottom-profile { display: none !important; }
+
+/* ── 1. PROFILE INSIDE SIDEBAR PANEL ───────────────────────── */
+.sp-profile {
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 14px 18px;
+  border-top: 1px solid rgba(0,207,200,0.10);
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.sp-profile-avatar-wrap { position: relative; flex-shrink: 0; }
+
+.sp-profile-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, #00cfc8, #007878);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-family: var(--font-display);
+  font-weight: 800; font-size: 16px;
+  border: 2px solid rgba(0,207,200,0.40);
+  box-shadow: 0 0 14px rgba(0,207,200,0.30);
+}
+
+.sp-profile-status {
+  position: absolute; bottom: 1px; right: 1px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #22dd88;
+  border: 2px solid #071e1e;
+  box-shadow: 0 0 6px rgba(34,221,136,0.6);
+}
+
+.sp-profile-info { flex: 1; overflow: hidden; }
+
+.sp-profile-name {
+  display: block; font-size: 13.5px; font-weight: 700;
+  font-family: var(--font-display); color: #fff;
+  letter-spacing: 0.02em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.sp-profile-plan {
+  display: block; font-size: 11px;
+  color: rgba(255,255,255,0.36); margin-top: 1px;
+}
+.sp-profile-plan i { color: #00cfc8; font-size: 10px; }
+
+/* Make sidebar panel flex column so profile stays at bottom */
+#sidebar-panel { display: flex; flex-direction: column; }
+.sp-history-list { flex: 1; }
+
+/* Dark mode status dot border */
+body.dark-mode .sp-profile-status { border-color: #061414; }
+
+/* ── 2. MODEL DROPDOWN ──────────────────────────────────────── */
+.model-dropdown-wrap {
+  position: relative;
+}
+
+.model-selector-btn {
+  display: flex; align-items: center; gap: 7px;
+  background: var(--accent-soft);
+  border: 1.5px solid rgba(0,207,200,0.28);
+  border-radius: var(--r-full);
+  padding: 6px 13px 6px 10px;
+  color: var(--text-primary);
+  font-family: var(--font-display); font-size: 13px; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+  transition: all 0.18s ease;
+  letter-spacing: 0.01em;
+}
+.model-selector-btn i:first-child { color: var(--accent); font-size: 13px; }
+.model-selector-btn:hover {
+  background: rgba(0,207,200,0.16);
+  border-color: rgba(0,207,200,0.50);
+  box-shadow: 0 2px 12px rgba(0,207,200,0.18);
+}
+.model-selector-btn.open {
+  background: rgba(0,207,200,0.18);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.model-arrow {
+  font-size: 10px !important;
+  color: var(--text-muted) !important;
+  transition: transform 0.22s ease;
+}
+.model-selector-btn.open .model-arrow { transform: rotate(180deg); }
+
+/* Dropdown panel */
+.model-dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0;
+  width: 270px;
+  background: var(--bg-main);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 500;
+  overflow: hidden;
+  opacity: 0; transform: translateY(-8px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.20s ease, transform 0.20s ease;
+}
+.model-dropdown.open {
+  opacity: 1; transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+.model-dropdown-header {
+  font-family: var(--font-display); font-size: 10.5px;
+  font-weight: 700; letter-spacing: 0.9px; text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 12px 16px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.model-list { list-style: none; margin: 0; padding: 6px 0; }
+
+.model-item {
+  display: flex; align-items: center; gap: 11px;
+  padding: 10px 14px; cursor: pointer;
+  transition: background 0.15s ease;
+  position: relative;
+}
+.model-item:hover { background: var(--bg-card-hover); }
+.model-item.active { background: var(--accent-soft); }
+
+.model-item-icon {
+  width: 34px; height: 34px; border-radius: var(--r-xs);
+  background: var(--accent-soft);
+  border: 1px solid rgba(0,207,200,0.20);
+  color: var(--accent); font-size: 14px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s ease;
+}
+.model-item.active .model-item-icon,
+.model-item:hover .model-item-icon {
+  background: var(--accent); color: #fff; border-color: var(--accent);
+}
+
+.model-item-info { flex: 1; overflow: hidden; }
+.model-item-name {
+  display: block; font-size: 13.5px; font-weight: 700;
+  font-family: var(--font-display); color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+.model-item-desc {
+  display: block; font-size: 11.5px; color: var(--text-muted);
+  margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.model-check {
+  font-size: 12px; color: var(--accent);
+  opacity: 0; transition: opacity 0.15s ease; flex-shrink: 0;
+}
+.model-item.active .model-check { opacity: 1; }
+
+/* Dark mode dropdown */
+body.dark-mode .model-dropdown { background: #0e2020; border-color: var(--border); }
+body.dark-mode .model-item:hover { background: rgba(0,207,200,0.06); }
+
+/* ── 3. INPUT FOCUS HIGHLIGHT ───────────────────────────────── */
+/* Remove old focus-within and replace with stronger highlight */
+.input-container {
+  transition: border-color 0.18s ease, box-shadow 0.18s ease,
+              transform 0.18s ease !important;
+}
+
+.input-container:focus-within {
+  border-color: var(--accent) !important;
+  box-shadow:
+    0 0 0 3px rgba(0,207,200,0.18),
+    0 4px 20px rgba(0,207,200,0.16) !important;
+  transform: translateY(-1px);
+}
+
+/* Textarea text cursor teal tint when focused */
+#message-input:focus { caret-color: var(--accent); }
+
+/* ── RESPONSIVE tweaks ──────────────────────────────────────── */
+@media (max-width: 520px) {
+  #model-label { display: none; }
+  .model-selector-btn { padding: 6px 10px; }
+  .model-dropdown { right: -40px; width: 240px; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════
+   FINE-TUNE 2 — Search btn plain, delete bins, send hover glow
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Plain search icon button (no highlight/fill) ────────── */
+/* Override sp-btn-secondary entirely — search is now icon only */
+.sp-search-icon-btn {
+  background: none !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  color: rgba(255,255,255,0.55) !important;
+  box-shadow: none !important;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 14px; flex-shrink: 0;
+  transition: all 0.16s ease;
+}
+.sp-search-icon-btn:hover {
+  background: rgba(0,207,200,0.10) !important;
+  border-color: rgba(0,207,200,0.35) !important;
+  color: #00cfc8 !important;
+}
+
+/* Make sp-actions a row now (new chat fills flex, search is compact) */
+.sp-actions {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid rgba(0,207,200,0.08);
+  flex-shrink: 0;
+}
+.sp-btn-primary { flex: 1; }
+
+/* ── 2. Delete bin on history items ─────────────────────────── */
+.sp-history-item {
+  position: relative;
+}
+/* Show delete only on hover */
+.sp-item-delete {
+  display: none;
+  background: none; border: none;
+  color: rgba(255,80,80,0.55);
+  width: 26px; height: 26px; border-radius: 6px;
+  align-items: center; justify-content: center;
+  cursor: pointer; font-size: 12px; flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+.sp-history-item:hover .sp-item-delete { display: flex; }
+.sp-item-delete:hover {
+  background: rgba(255,80,80,0.14);
+  color: #ff4444;
+}
+
+/* ── 3. Clear chat (trash) button in top nav ─────────────────── */
+#clear-chat-btn {
+  /* inherits .nav-action-btn */
+}
+#clear-chat-btn:hover {
+  background: rgba(255,80,80,0.10) !important;
+  border-color: rgba(255,80,80,0.40) !important;
+  color: #ff4444 !important;
+}
+
+/* ── 4. Send button hover glow highlight ─────────────────────── */
+.send-btn {
+  position: relative;
+  overflow: visible;
+}
+.send-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #00e8e0, #00b0a8) !important;
+  transform: scale(1.12) !important;
+  box-shadow:
+    0 0 0 4px rgba(0,207,200,0.22),
+    0 6px 22px rgba(0,207,200,0.55) !important;
+}
+.send-btn:active:not(:disabled) {
+  transform: scale(0.96) !important;
+  box-shadow: 0 2px 10px rgba(0,207,200,0.35) !important;
+}
 

@@ -11,7 +11,9 @@
 </head>
 <body>
 
-  <!--  INTRO SPLASH  -->
+  <!-- ══════════════════════════════════════════
+       INTRO SPLASH
+  ══════════════════════════════════════════ -->
   <div id="intro-splash">
     <div class="splash-bg"></div>
     <canvas id="splash-canvas"></canvas>
@@ -30,11 +32,15 @@
     </div>
   </div>
 
-  <!-- MAIN APP -->
+  <!-- ══════════════════════════════════════════
+       MAIN APP
+  ══════════════════════════════════════════ -->
   <div id="app" class="app-hidden">
 
     <!-- ── SLIDE-IN SIDEBAR PANEL ──────────────────────────── -->
     <div id="sidebar-panel">
+
+      <!-- Panel header -->
       <div class="sp-header">
         <div class="sp-brand">
           <img src="images/kuttyai-logo.png" alt="KuttyAI" class="sp-logo"/>
@@ -47,17 +53,16 @@
 
       <!-- Action buttons -->
       <div class="sp-actions">
-        <button class="sp-action-btn" id="sp-new-chat-btn">
+        <button class="sp-action-btn sp-btn-primary" id="sp-new-chat-btn">
           <i class="fa-solid fa-plus"></i>
           <span>New Chat</span>
         </button>
-        <button class="sp-action-btn" id="sp-search-toggle-btn">
+        <button class="sp-search-icon-btn" id="sp-search-toggle-btn" title="Search chats" aria-label="Search chats">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <span>Search Chats</span>
         </button>
       </div>
 
-      <!-- Search box (hidden by default) -->
+      <!-- Search box -->
       <div class="sp-search-box" id="sp-search-box">
         <div class="sp-search-input-wrap">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -65,7 +70,7 @@
         </div>
       </div>
 
-      <!-- Chat history list -->
+      <!-- Chat history -->
       <div class="sp-history-label">Recent Chats</div>
       <ul class="sp-history-list" id="sp-history-list">
         <li class="sp-history-item active" data-chat="1">
@@ -74,6 +79,7 @@
             <span class="sp-item-title">Getting started with AI</span>
             <span class="sp-item-time">Today</span>
           </div>
+          <button class="sp-item-delete" title="Delete chat" aria-label="Delete chat"><i class="fa-solid fa-trash-can"></i></button>
         </li>
         <li class="sp-history-item" data-chat="2">
           <i class="fa-regular fa-message"></i>
@@ -81,6 +87,7 @@
             <span class="sp-item-title">Python list sorting help</span>
             <span class="sp-item-time">Yesterday</span>
           </div>
+          <button class="sp-item-delete" title="Delete chat" aria-label="Delete chat"><i class="fa-solid fa-trash-can"></i></button>
         </li>
         <li class="sp-history-item" data-chat="3">
           <i class="fa-regular fa-message"></i>
@@ -88,6 +95,7 @@
             <span class="sp-item-title">Essay writing techniques</span>
             <span class="sp-item-time">Yesterday</span>
           </div>
+          <button class="sp-item-delete" title="Delete chat" aria-label="Delete chat"><i class="fa-solid fa-trash-can"></i></button>
         </li>
         <li class="sp-history-item" data-chat="4">
           <i class="fa-regular fa-message"></i>
@@ -95,6 +103,7 @@
             <span class="sp-item-title">Data analysis best practices</span>
             <span class="sp-item-time">Apr 10</span>
           </div>
+          <button class="sp-item-delete" title="Delete chat" aria-label="Delete chat"><i class="fa-solid fa-trash-can"></i></button>
         </li>
         <li class="sp-history-item" data-chat="5">
           <i class="fa-regular fa-message"></i>
@@ -102,6 +111,7 @@
             <span class="sp-item-title">Machine learning concepts</span>
             <span class="sp-item-time">Apr 9</span>
           </div>
+          <button class="sp-item-delete" title="Delete chat" aria-label="Delete chat"><i class="fa-solid fa-trash-can"></i></button>
         </li>
         <li class="sp-history-item" data-chat="6">
           <i class="fa-regular fa-message"></i>
@@ -109,6 +119,7 @@
             <span class="sp-item-title">Creative story brainstorm</span>
             <span class="sp-item-time">Apr 8</span>
           </div>
+          <button class="sp-item-delete" title="Delete chat" aria-label="Delete chat"><i class="fa-solid fa-trash-can"></i></button>
         </li>
         <li class="sp-history-item" data-chat="7">
           <i class="fa-regular fa-message"></i>
@@ -116,6 +127,7 @@
             <span class="sp-item-title">React component design</span>
             <span class="sp-item-time">Apr 7</span>
           </div>
+          <button class="sp-item-delete" title="Delete chat" aria-label="Delete chat"><i class="fa-solid fa-trash-can"></i></button>
         </li>
         <li class="sp-history-item" data-chat="8">
           <i class="fa-regular fa-message"></i>
@@ -123,6 +135,7 @@
             <span class="sp-item-title">Career advice questions</span>
             <span class="sp-item-time">Apr 6</span>
           </div>
+          <button class="sp-item-delete" title="Delete chat" aria-label="Delete chat"><i class="fa-solid fa-trash-can"></i></button>
         </li>
         <li class="sp-history-item" data-chat="9">
           <i class="fa-regular fa-message"></i>
@@ -130,6 +143,7 @@
             <span class="sp-item-title">SQL query optimisation</span>
             <span class="sp-item-time">Apr 5</span>
           </div>
+          <button class="sp-item-delete" title="Delete chat" aria-label="Delete chat"><i class="fa-solid fa-trash-can"></i></button>
         </li>
         <li class="sp-history-item" data-chat="10">
           <i class="fa-regular fa-message"></i>
@@ -137,10 +151,28 @@
             <span class="sp-item-title">Resume review feedback</span>
             <span class="sp-item-time">Apr 4</span>
           </div>
+          <button class="sp-item-delete" title="Delete chat" aria-label="Delete chat"><i class="fa-solid fa-trash-can"></i></button>
         </li>
       </ul>
-    </div>
-    <!-- PANEL OVERLAY -->
+
+      <!-- ── Husen profile inside sidebar (bottom) ── -->
+      <div class="sp-profile">
+        <div class="sp-profile-avatar-wrap">
+          <div class="sp-profile-avatar">H</div>
+          <span class="sp-profile-status"></span>
+        </div>
+        <div class="sp-profile-info">
+          <span class="sp-profile-name">Husen</span>
+          <span class="sp-profile-plan"><i class="fa-solid fa-circle-check"></i> Free Plan</span>
+        </div>
+        <button class="theme-toggle-btn" id="theme-toggle" title="Toggle theme">
+          <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+      </div>
+
+    </div><!-- end #sidebar-panel -->
+
+    <!-- Overlay -->
     <div id="sidebar-overlay"></div>
 
     <!-- ── MAIN CONTENT ─────────────────────────────────────── -->
@@ -148,21 +180,77 @@
 
       <!-- TOP NAV -->
       <header id="top-nav">
-        <!-- Hamburger / 3-line toggle -->
+
+        <!-- Left: hamburger -->
         <button id="hamburger-btn" aria-label="Toggle sidebar">
           <i class="fa-solid fa-bars"></i>
         </button>
 
+        <!-- Centre: brand -->
         <div class="nav-brand-wrap">
           <img src="images/kuttyai-logo.png" alt="KuttyAI" class="nav-logo-img"/>
           <div class="nav-title">Kutty<span class="nav-ai">.AI</span></div>
         </div>
 
-        <!-- Only export — no Husen chip here -->
+        <!-- Right: model dropdown + export -->
         <div class="nav-actions">
+
+          <!-- Model selector dropdown -->
+          <div class="model-dropdown-wrap" id="model-dropdown-wrap">
+            <button class="model-selector-btn" id="model-selector-btn" title="Select model">
+              <i class="fa-solid fa-microchip"></i>
+              <span id="model-label">Kutty.AI Mini</span>
+              <i class="fa-solid fa-chevron-down model-arrow" id="model-arrow"></i>
+            </button>
+            <div class="model-dropdown" id="model-dropdown">
+              <div class="model-dropdown-header">Select Model</div>
+              <ul class="model-list">
+                <li class="model-item active" data-model="Kutty.AI Mini">
+                  <div class="model-item-icon"><i class="fa-solid fa-bolt"></i></div>
+                  <div class="model-item-info">
+                    <span class="model-item-name">Kutty.AI Mini</span>
+                    <span class="model-item-desc">Fast &amp; efficient for everyday tasks</span>
+                  </div>
+                  <i class="fa-solid fa-check model-check"></i>
+                </li>
+                <li class="model-item" data-model="Kutty.AI Pro">
+                  <div class="model-item-icon"><i class="fa-solid fa-star"></i></div>
+                  <div class="model-item-info">
+                    <span class="model-item-name">Kutty.AI Pro</span>
+                    <span class="model-item-desc">Balanced performance &amp; reasoning</span>
+                  </div>
+                  <i class="fa-solid fa-check model-check"></i>
+                </li>
+                <li class="model-item" data-model="Kutty.AI Ultra">
+                  <div class="model-item-icon"><i class="fa-solid fa-crown"></i></div>
+                  <div class="model-item-info">
+                    <span class="model-item-name">Kutty.AI Ultra</span>
+                    <span class="model-item-desc">Most capable — complex reasoning</span>
+                  </div>
+                  <i class="fa-solid fa-check model-check"></i>
+                </li>
+                <li class="model-item" data-model="Kutty.AI Code">
+                  <div class="model-item-icon"><i class="fa-solid fa-code"></i></div>
+                  <div class="model-item-info">
+                    <span class="model-item-name">Kutty.AI Code</span>
+                    <span class="model-item-desc">Optimised for programming tasks</span>
+                  </div>
+                  <i class="fa-solid fa-check model-check"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Clear chat -->
+          <button class="nav-action-btn" id="clear-chat-btn" title="Clear conversation">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+
+          <!-- Export -->
           <button class="nav-action-btn" id="export-btn" title="Export conversation">
             <i class="fa-solid fa-file-arrow-down"></i>
           </button>
+
         </div>
       </header>
 
@@ -242,7 +330,7 @@
           </button>
         </div>
 
-        <div class="input-container">
+        <div class="input-container" id="input-container">
           <button class="input-action-btn attach-btn" title="Attach file" aria-label="Attach file">
             <i class="fa-solid fa-paperclip"></i>
           </button>
@@ -265,22 +353,6 @@
       </footer>
 
     </main>
-
-    <!-- ── BOTTOM-LEFT PROFILE (sidebar replaced by panel, keep profile here) -->
-    <div id="bottom-profile">
-      <div class="user-avatar-wrap">
-        <div class="user-avatar">H</div>
-        <span class="user-status-dot"></span>
-      </div>
-      <div class="user-info">
-        <span class="user-name">Husen</span>
-        <span class="user-plan"><i class="fa-solid fa-circle-check"></i> Free Plan</span>
-      </div>
-      <button class="theme-toggle-btn" id="theme-toggle" title="Toggle theme">
-        <i class="fa-solid fa-moon" id="theme-icon"></i>
-      </button>
-    </div>
-
   </div><!-- end #app -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
