@@ -90,18 +90,7 @@
    ══════════════════════════════════════════════════════ */
 $(function () {
 
-  /* ── AI Response Pool ── */
-  const RESPONSES = [
-    "That's a great question, Husen! Let me break this down clearly.\n\nThe best approach here is to start simple, validate your assumptions, and iterate. Breaking the problem into smaller, testable pieces makes it far more manageable and helps you catch issues early.",
-    "Absolutely! Here's a structured breakdown:\n\n**Step 1** — Understand the core concept deeply\n**Step 2** — Apply it with a minimal example\n**Step 3** — Build complexity gradually\n\nThis approach ensures a solid foundation before moving forward.",
-    "Great point! There are a few perspectives worth considering here:\n\n- Focus on what matters most for your use case\n- Don't over-engineer the first version\n- Measure results and adjust accordingly\n\nWould you like me to elaborate on any of these?",
-    "Of course! Here's the key insight:\n\n- **Clarity** beats complexity every time\n- Always test your assumptions early\n- Document decisions as you make them — your future self will thank you\n\nShall I go deeper on any of these?",
-    "Interesting question! This topic has quite a bit of depth. The crucial insight is that understanding *why* something works is just as important as knowing *how* it works. Shall I walk you through the reasoning step by step?",
-    "Sure thing! The approach I'd recommend depends on your specific constraints — scope, timeline, and desired outcome. Could you share a bit more context so I can give you a more tailored answer?",
-    "Here's a concise, professional answer:\n\nThe best practice is to **keep things lean and iterative** — start with the minimum viable version, validate it quickly, and build from there. Over-engineering at the start is one of the most common (and costly) mistakes.",
-    "You're thinking along the right lines, Husen. The key nuance is that context matters enormously — what works perfectly in one situation may not directly translate to another. Adaptability and critical thinking are your best tools here.",
-  ];
-
+  let currentConversationId = null;
   let chatStarted  = false;
   let isRecording  = false;
   let recognition  = null;
@@ -202,8 +191,32 @@ $(function () {
     updateCharCount();
 
     showTyping();
-    setTimeout(() => { hideTyping(); addMessage(pick(RESPONSES), 'ai'); },
-      1000 + Math.random() * 1100);
+    
+    // Call backend API
+    fetch('http://localhost:5000/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            message: text,
+            conversation_id: currentConversationId,
+            model: $('#model-label').text()
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        hideTyping();
+        if (data.success) {
+            currentConversationId = data.data.conversation_id;
+            addMessage(data.data.response, 'ai');
+        } else {
+            addMessage("Sorry, I encountered an error: " + data.error, 'ai');
+        }
+    })
+    .catch(error => {
+        hideTyping();
+        addMessage("Sorry, I couldn't reach the server. Is the API running?", 'ai');
+        console.error('Error:', error);
+    });
   }
 
 
@@ -401,6 +414,7 @@ $(function () {
     stopRecording();
     chatStarted = false;
     $('#welcome-screen').removeClass('hidden');
+    currentConversationId = null;
     $('#message-input').val('').trigger('input');
     updateCharCount();
     const ws = document.getElementById('welcome-screen');
