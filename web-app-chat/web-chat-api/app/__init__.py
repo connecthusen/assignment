@@ -14,11 +14,18 @@ def create_app(config_name='default'):
 
     from app.controllers.chat_controller import chat_bp
     app.register_blueprint(chat_bp, url_prefix='/api')
+    
+    from app.controllers.document_controller import document_bp
+    app.register_blueprint(document_bp, url_prefix='/api')
 
     with app.app_context():
         db.create_all()
 
     resgister_error_handlers(app)
+
+    @app.route('/')
+    def index():
+        return "<h2>Backend API is Running!</h2><p>Please open <b>Chat UI Development/ChatUI/index.html</b> in your browser to use the application.</p>"
 
     return app
 

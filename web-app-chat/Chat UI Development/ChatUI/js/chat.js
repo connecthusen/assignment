@@ -123,18 +123,62 @@ $(function () {
     $s.animate({ scrollTop: $s[0].scrollHeight }, 260);
   }
 
-  /**
-   * Lightweight markdown formatter:
-   * ```block```, `inline`, **bold**, *italic*, \n → <br>
-   */
-  function fmt (txt) {
-    txt = txt.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-    txt = txt.replace(/`([^`]+)`/g, '<code>$1</code>');
-    txt = txt.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    txt = txt.replace(/\*([^*\n]+)\*/g,   '<em>$1</em>');
-    txt = txt.replace(/\n/g, '<br>');
-    return txt;
+  // Configure marked to use highlight.js
+  if (window.marked && window.hljs) {
+    marked.setOptions({
+      highlight: function(code, lang) {
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        return hljs.highlight(code, { language }).value;
+      },
+      breaks: true
+    });
   }
+
+  function fmt (txt) {
+    if (!window.marked || !window.DOMPurify) return txt.replace(/\n/g, '<br>');
+    let html = marked.parse(txt);
+    html = DOMPurify.sanitize(html);
+    
+    // Inject Copy Code button
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    
+    doc.querySelectorAll('pre code').forEach((block) => {
+      const pre = block.parentElement;
+      const langClass = Array.from(block.classList).find(c => c.startsWith('language-'));
+      const lang = langClass ? langClass.replace('language-', '') : 'Code';
+      
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block-wrapper';
+      
+      const header = document.createElement('div');
+      header.className = 'code-block-header';
+      header.innerHTML = `
+        <span>${lang}</span>
+        <button class="copy-code-btn" title="Copy code">
+          <i class="fa-regular fa-copy"></i> Copy
+        </button>
+      `;
+      
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(header);
+      wrapper.appendChild(pre);
+    });
+    
+    return doc.body.innerHTML;
+  }
+  
+  // Copy Code Logic
+  $(document).on('click', '.copy-code-btn', function() {
+    const $btn = $(this);
+    const code = $btn.closest('.code-block-wrapper').find('code').text();
+    navigator.clipboard.writeText(code).then(() => {
+      $btn.html('<i class="fa-solid fa-check"></i> Copied!');
+      setTimeout(() => {
+        $btn.html('<i class="fa-regular fa-copy"></i> Copy');
+      }, 2000);
+    });
+  });
 
   function updateCharCount () {
     const len = $('#message-input').val().length;
@@ -189,6 +233,9 @@ $(function () {
     $('#message-input').val('').trigger('input');
     $('#send-btn').prop('disabled', true);
     updateCharCount();
+    
+    // Clear attachment after sending
+    clearAttachment();
 
     showTyping();
     
@@ -208,6 +255,7 @@ $(function () {
         if (data.success) {
             currentConversationId = data.data.conversation_id;
             addMessage(data.data.response, 'ai');
+            loadConversations(); // refresh the sidebar
         } else {
             addMessage("Sorry, I encountered an error: " + data.error, 'ai');
         }
@@ -243,10 +291,110 @@ $(function () {
   });
 
   $('#message-input').on('keydown', function (e) {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    if (e.key === 'Enter' && !e.shiftKey) { 
+      e.preventDefault(); 
+      sendMessage(); 
+    }
+    // Shift+Enter natively creates a new line in textarea, so no extra code needed for it.
   });
 
   $('#send-btn').on('click', sendMessage);
+
+  /* ════════════════════════════════════════════════════
+     7.5 FILE ATTACHMENTS & DRAG & DROP
+  ════════════════════════════════════════════════════ */
+  let currentFile = null;
+
+  function clearAttachment() {
+    currentFile = null;
+    $('#file-upload-input').val('');
+    $('#attachment-preview').addClass('hidden');
+    $('#attachment-img').attr('src', '');
+  }
+
+  function handleFile(file) {
+    if (!file) return;
+    currentFile = file;
+    
+    // Image preview (frontend only for now)
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        $('#attachment-img').attr('src', e.target.result);
+        $('#attachment-preview').removeClass('hidden');
+      }
+      reader.readAsDataURL(file);
+    } 
+    // Document Upload for RAG (PDF, TXT)
+    else if (file.type === 'application/pdf' || file.type === 'text/plain') {
+      const formData = new FormData();
+      formData.append('file', file);
+      
+      // Show uploading indicator
+      addMessage(`Uploading ${file.name} to KuttyAI Knowledge Base...`, 'ai');
+      
+      fetch('http://localhost:5000/api/upload', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          addMessage(`✅ **Success**: ${data.message}`, 'ai');
+        } else {
+          addMessage(`❌ **Error**: ${data.error}`, 'ai');
+        }
+      })
+      .catch(error => {
+        console.error('Upload Error:', error);
+        addMessage(`❌ **Upload failed**: Could not reach the server.`, 'ai');
+      })
+      .finally(() => {
+        clearAttachment();
+      });
+    } else {
+      alert(`Attached file: ${file.name}\n(Only Images, PDFs, and TXT files are fully supported currently)`);
+      clearAttachment();
+    }
+  }
+
+  $('#attach-btn').on('click', function(e) {
+    e.preventDefault();
+    $('#file-upload-input').click();
+  });
+
+  $('#file-upload-input').on('change', function(e) {
+    if (e.target.files && e.target.files[0]) {
+      handleFile(e.target.files[0]);
+    }
+  });
+
+  $('#attachment-remove').on('click', function(e) {
+    e.preventDefault();
+    clearAttachment();
+  });
+
+  // Drag and drop events
+  const $inputContainer = $('#input-container');
+
+  $inputContainer.on('dragover dragenter', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $inputContainer.addClass('drag-over');
+  });
+
+  $inputContainer.on('dragleave dragend drop', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $inputContainer.removeClass('drag-over');
+  });
+
+  $inputContainer.on('drop', function(e) {
+    const files = e.originalEvent.dataTransfer.files;
+    if (files && files.length > 0) {
+      handleFile(files[0]);
+    }
+  });
 
 
   /* ════════════════════════════════════════════════════
@@ -353,12 +501,16 @@ $(function () {
   ════════════════════════════════════════════════════ */
   function openPanel () {
     $('#sidebar-panel').addClass('open');
+    $('body').addClass('sidebar-open');
     $('#sidebar-overlay').addClass('active');
-    $('body').css('overflow', 'hidden');
+    if (window.innerWidth <= 768) {
+      $('body').css('overflow', 'hidden');
+    }
   }
 
   function closePanel () {
     $('#sidebar-panel').removeClass('open');
+    $('body').removeClass('sidebar-open');
     $('#sidebar-overlay').removeClass('active');
     $('body').css('overflow', '');
   }
@@ -401,6 +553,10 @@ $(function () {
   $(document).on('click', '.sp-history-item', function () {
     $('.sp-history-item').removeClass('active');
     $(this).addClass('active');
+    
+    const convId = $(this).data('chat');
+    loadConversationHistory(convId);
+    
     closePanel();
   });
 
@@ -418,7 +574,7 @@ $(function () {
     $('#message-input').val('').trigger('input');
     updateCharCount();
     const ws = document.getElementById('welcome-screen');
-    ws.style.animation = 'none'; void ws.offsetWidth; ws.style.animation = '';
+    if(ws) { ws.style.animation = 'none'; void ws.offsetWidth; ws.style.animation = ''; }
   }
 
 
@@ -469,11 +625,68 @@ $(function () {
 
 
   /* ════════════════════════════════════════════════════
-    14.  INIT
+     15.  API INTEGRATION
+  ════════════════════════════════════════════════════ */
+  
+  function formatDateShort(isoStr) {
+      if (!isoStr) return "";
+      const d = new Date(isoStr);
+      return `${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`;
+  }
+
+  function loadConversations() {
+      fetch('http://localhost:5000/api/conversations')
+        .then(res => res.json())
+        .then(data => {
+            if(data.success && data.data) {
+                const list = $('#sp-history-list');
+                list.empty();
+                data.data.forEach(conv => {
+                    const activeClass = (conv.id === currentConversationId) ? 'active' : '';
+                    const title = conv.title || "New Chat";
+                    const time = formatDateShort(conv.updated_at || conv.created_at);
+                    
+                    list.append(`
+                        <li class="sp-history-item ${activeClass}" data-chat="${conv.id}">
+                          <i class="fa-regular fa-message"></i>
+                          <div class="sp-item-info">
+                            <span class="sp-item-title">${title}</span>
+                            <span class="sp-item-time">${time}</span>
+                          </div>
+                          <button class="sp-item-delete" title="Delete chat" aria-label="Delete chat"><i class="fa-solid fa-trash-can"></i></button>
+                        </li>
+                    `);
+                });
+            }
+        }).catch(err => console.error("Error loading conversations", err));
+  }
+  
+  function loadConversationHistory(convId) {
+      fetch(`http://localhost:5000/api/conversations/${convId}`)
+        .then(res => res.json())
+        .then(data => {
+            if(data.success && data.data) {
+                $('#chat-messages').empty();
+                chatStarted = true;
+                $('#welcome-screen').addClass('hidden');
+                currentConversationId = convId;
+                
+                data.data.messages.forEach(msg => {
+                    addMessage(msg.content, msg.role === 'user' ? 'user' : 'ai');
+                });
+            }
+        }).catch(err => console.error("Error loading conversation history", err));
+  }
+
+  /* ════════════════════════════════════════════════════
+    16.  INIT
   ════════════════════════════════════════════════════ */
   if (window.innerWidth > 768) {
+    openPanel(); // Open by default on desktop
     setTimeout(() => $('#message-input').focus(), 2700);
   }
+  
+  loadConversations();
 
   console.log('%c⚡ KuttyAI  |  User: Husen  |  Loaded ✓', 'color:#00cfc8;font-size:13px;font-weight:bold;');
 
@@ -532,8 +745,21 @@ $(function () {
   $(document).on('click', '.sp-item-delete', function (e) {
     e.stopPropagation(); // don't trigger the history item click
     const $item = $(this).closest('.sp-history-item');
-    $item.css({ transition: 'opacity 0.25s, transform 0.25s', opacity: 0, transform: 'translateX(-12px)' });
-    setTimeout(() => $item.remove(), 260);
+    const convId = $item.data('chat');
+    
+    fetch(`http://localhost:5000/api/conversations/${convId}`, { method: 'DELETE' })
+      .then(res => res.json())
+      .then(data => {
+          if(data.success) {
+            $item.css({ transition: 'opacity 0.25s, transform 0.25s', opacity: 0, transform: 'translateX(-12px)' });
+            setTimeout(() => {
+                $item.remove();
+                if(currentConversationId === convId) {
+                    resetChat();
+                }
+            }, 260);
+          }
+      });
   });
 
   /* ════════════════════════════════════════════════════
@@ -542,6 +768,15 @@ $(function () {
   $('#clear-chat-btn').on('click', function () {
     if (!$('#chat-messages').children().length) return;
     if (!confirm('Clear this conversation? This cannot be undone.')) return;
-    resetChat();
+    
+    if (currentConversationId) {
+        fetch(`http://localhost:5000/api/conversations/${currentConversationId}`, { method: 'DELETE' })
+            .then(() => {
+                resetChat();
+                loadConversations();
+            });
+    } else {
+        resetChat();
+    }
   });
 

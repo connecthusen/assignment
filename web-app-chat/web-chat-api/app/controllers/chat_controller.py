@@ -22,7 +22,7 @@ def chat():
         # Initialize the AI Model
         # Using a dummy model configuration or mapping to actual Groq models if needed
         # We assume `AIModel` uses `GROQ_MODEL` if none is passed, or we can map UI names to Groq models:
-        actual_model = "llama3-8b-8192" # Use a default fast model
+        actual_model = "llama-3.1-8b-instant" # Use a default fast model
         ai_model = AIModel(model=actual_model)
         
         conversation = None

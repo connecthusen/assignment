@@ -3,3 +3,15 @@ flask-cors
 flask-sqlalchemy
 python-dotenv
 groq
+langchain
+langchain-groq
+langchain-community
+langchain-huggingface
+langchain-chroma
+langchainhub
+chromadb
+sentence-transformers
+pypdf
+werkzeug
+duckduckgo-search
+wikipedia

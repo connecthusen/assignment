@@ -350,7 +350,13 @@ html, body {
   flex:1; display:flex; flex-direction:column;
   height:100vh; overflow:hidden;
   background: var(--bg-main);
-  transition: background var(--tr-m);
+  transition: background var(--tr-m), margin-left 0.30s cubic-bezier(0.4,0,0.2,1);
+}
+
+@media (min-width: 769px) {
+  body.sidebar-open #main-content {
+    margin-left: 290px;
+  }
 }
 
 /* ─── 10. TOP NAV ────────────────────────────────────────────── */
@@ -1283,20 +1289,93 @@ body.dark-mode .model-item:hover { background: rgba(0,207,200,0.06); }
   color: #ff4444 !important;
 }
 
-/* ── 4. Send button hover glow highlight ─────────────────────── */
-.send-btn {
-  position: relative;
-  overflow: visible;
+/* ══════════════════════════════════════════════════════════════
+   MARKDOWN & HIGHLIGHT.JS STYLES
+   ══════════════════════════════════════════════════════════════ */
+.message-bubble table {
+  width: 100%; border-collapse: collapse; margin: 12px 0;
+  border: 1px solid var(--border); border-radius: 6px;
+  overflow: hidden; display: block; overflow-x: auto;
 }
-.send-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #00e8e0, #00b0a8) !important;
-  transform: scale(1.12) !important;
-  box-shadow:
-    0 0 0 4px rgba(0,207,200,0.22),
-    0 6px 22px rgba(0,207,200,0.55) !important;
+.message-bubble th, .message-bubble td {
+  padding: 8px 12px; border: 1px solid var(--border); text-align: left;
 }
-.send-btn:active:not(:disabled) {
-  transform: scale(0.96) !important;
-  box-shadow: 0 2px 10px rgba(0,207,200,0.35) !important;
+.message-bubble th { background: var(--bg-card-hover); font-weight: 700; }
+.message-bubble blockquote {
+  border-left: 4px solid var(--accent); padding-left: 12px;
+  margin: 12px 0; color: var(--text-muted); font-style: italic;
+  background: var(--accent-soft); padding: 8px 12px; border-radius: 0 8px 8px 0;
+}
+.message-bubble ul, .message-bubble ol { margin: 8px 0 8px 20px; padding: 0; }
+.message-bubble li { margin-bottom: 4px; }
+.message-bubble a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.message-bubble a:hover { text-decoration: underline; }
+
+/* Inline Code Override */
+.message-bubble code:not(.hljs) {
+  background: rgba(0,207,200,0.12);
+  color: var(--accent-2);
+  padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace;
+  font-size: 13px; font-weight: 600;
+}
+body.dark-mode .message-bubble code:not(.hljs) { color: #72fff8; }
+
+/* Pre/Code Block Container for Copy Button */
+.code-block-wrapper {
+  position: relative; margin: 12px 0;
+  border-radius: 8px; overflow: hidden;
+  background: #282c34; /* Atom one dark bg */
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.code-block-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 6px 12px; background: #1e2227;
+  font-family: var(--font-display); font-size: 11px; font-weight: 700;
+  color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.copy-code-btn {
+  background: none; border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.8); padding: 3px 8px; border-radius: 4px;
+  font-size: 10.5px; cursor: pointer; transition: all 0.2s ease;
+  display: flex; align-items: center; gap: 4px;
+}
+.copy-code-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.copy-code-btn i { font-size: 11px; }
+
+/* Highlight.js pre reset */
+.message-bubble pre { margin: 0; padding: 0; background: transparent; border: none; }
+.message-bubble pre code.hljs { padding: 12px; font-size: 13.5px; line-height: 1.5; border-radius: 0; }
+
+/* ══════════════════════════════════════════════════════════════
+   DRAG & DROP / ATTACHMENT PREVIEW
+   ══════════════════════════════════════════════════════════════ */
+.input-container.drag-over {
+  border-color: var(--accent) !important;
+  border-style: dashed !important;
+  background: var(--accent-soft) !important;
+  box-shadow: 0 0 0 4px rgba(0,207,200,0.15), 0 4px 20px rgba(0,207,200,0.2) !important;
 }
 
+#attachment-preview {
+  position: absolute; bottom: calc(100% + 12px); left: 0;
+  padding: 8px; background: var(--bg-card);
+  border: 1.5px solid var(--border); border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm);
+  display: flex; align-items: flex-start; gap: 8px;
+  animation: slideInUp 0.3s ease;
+  z-index: 100;
+}
+#attachment-img {
+  max-height: 60px; max-width: 100px; border-radius: 4px;
+  object-fit: cover; border: 1px solid var(--border);
+}
+#attachment-remove {
+  background: rgba(255,80,80,0.1); border: none;
+  color: #ff4444; width: 22px; height: 22px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 11px; transition: all 0.2s ease;
+}
+#attachment-remove:hover { background: rgba(255,80,80,0.2); color: #ff2222; }
+
+/* Ensure input-container is relative so attachment preview anchors correctly */
+.input-container { position: relative; }
